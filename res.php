@@ -1,18 +1,16 @@
 <?php
-// Connexion à la base de données
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "inscription";
-// Créer une connexion à la base de données
+
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Vérifier la connexion
 if ($conn->connect_error) {
     die("La connexion a échoué : " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Récupérer les données du formulaire
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $groupe = $_POST['groupe'];
@@ -20,23 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateDebut = $_POST['dateDebut'];
     $dateFin = $_POST['dateFin'];
     $encadrement = $_POST['encadrement'];
-
-    // Préparer la requête d'insertion
     $stmt = $conn->prepare("INSERT INTO participants (nom, prenom, groupe, dqte, dateDebut, dateFin, encadrement) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $nom, $prenom, $groupe, $dqte, $dateDebut, $dateFin, $encadrement);
 
-    // Exécuter la requête
     if ($stmt->execute()) {
         $message = "Données enregistrées avec succès!";
     } else {
         $message = "Une erreur est survenue lors de l'enregistrement.";
     }
 
-    // Fermer la préparation de la requête
     $stmt->close();
 }
-
-// Fermer la connexion à la base de données
 $conn->close();
 ?>
 
