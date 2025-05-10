@@ -44,14 +44,11 @@ $conn->close();
   <div class="container mx-auto p-6">
     <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Formulaire d'Inscription</h2>
 
-    <!-- Affichage du message de succès ou erreur -->
     <?php if (isset($message)): ?>
       <div class="mt-6 p-4 bg-green-500 text-white rounded-md text-center">
         <?php echo $message; ?>
       </div>
     <?php endif; ?>
-
-    <!-- Affichage des données -->
     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
       <ul class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
         <li class="py-2"><strong class="text-gray-700">Nom :</strong> <?php echo htmlspecialchars($nom); ?></li>
